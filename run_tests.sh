@@ -130,14 +130,39 @@ case $program_ext in
         for file in $test_files; do
             test_file=$test_cases_folder/$file
 
+            current_args=()
+            input_pipe=true
+            output_pipe=true
+
             name=$(echo $file | cut -f 1 -d '.')
             extension=$(echo $file | cut -f 2 -d '.')
             output_file=$output_folder/$name.out.$extension
 
+            for arg in ${args[@]}; do
+                if [[ $arg =~ "%if" ]]; then
+                    current_args+=$test_file
+                    input_pipe=false
+                elif [[ $arg =~ "%of" ]]; then
+                    current_args+=$output_file
+                    output_pipe=false
+                else
+                    current_args+=arg
+                fi
+            done
+
             echo $line
             echo "Running $test_file ..."
-            echo "python3 $program $test_file ${args[@]} > $output_file"
-            python3 $program $test_file ${args[@]} > $output_file
+            
+            command="python3 $program ${current_args[@]}"
+            if [ $input_pipe = true ]; then
+                command="$command < $test_file"
+            fi
+            if [ $output_pipe = true ]; then
+                command="$command > $output_file"
+            fi
+
+            echo $command
+            command
         done
         ;;
     "java")
