@@ -30,6 +30,13 @@ Flags:\n
 \t    -o, --output:  Specify the output folder\n
 \t    -a, --args:    Specify the arguments to be passed to the program\n
 \n
+Args:\n
+Arguments are passed to the file in ther order they are given after the -a flag\n
+\t    Key word arguments: If you want any keyword arguments type it in the form key=value\n
+\t    File as argument: if you want ether the input or output file as an argument us %if for input file and %of for output file. NOTE: if nether of these are used normal piping will be used.\n
+\t    eg. -a %if %of --> command program folder/input_file fodler.out/output_file\n
+\t    eg. -a ----------> command program < folder/input_file > folder.out/output_file \n
+\n
 Example:\n
 \t    ./test.sh -o output -a 1 2 3 test.py input\n
 \t    python3 test.py input/test1.txt 1 2 3 > output/test1.txt\n
