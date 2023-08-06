@@ -1,5 +1,7 @@
 # Test Runner
 
+> To use the script just copy the .sh file into the same directory as your project, also make sure that all your test cases are in a single folder
+
 This script runs the test cases in the input folder and store them in a coresponding output folder
 The program automatically detects the extension of the program and runs it accordingly:
 Running: command program test_file *args > output
