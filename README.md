@@ -29,3 +29,6 @@ eg. -a ----------> command program < folder/input_file > folder.out/output_file
 ### Example:
 -    `./test.sh -o output -a 1 2 3 test.py input`
 -    `python3 test.py input/test1.txt 1 2 3 > output/test1.txt`
+
+
+**NOTE**: This scipt only works with python at the moment. The other program types my have bugs, and will be fully implemented at a later date. (I will prioritise them on request)
