@@ -160,7 +160,16 @@ case $program_ext in
             echo $line
             echo "Running $test_file ..."
             
-            command="python3 $program ${current_args[@]}"
+            if command -v python3 > /dev/null; then
+                pyv="python3"
+            elif command -v python > /dev/null; then
+                pyv="python"
+            else
+                echo "Python is not installed"
+                exit 1
+            fi
+
+            command="$pyv $program ${current_args[@]}"
             if [ $input_pipe = true ]; then
                 command="$command < $test_file"
             fi
