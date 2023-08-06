@@ -18,6 +18,7 @@ Usage: `./test.sh <flags> <program> <test_cases_folder>`
 -    -h, --help:    Display this help message
 -    -o, --output:  Specify the output folder
 -    -a, --args:    Specify the arguments to be passed to the program
+-    -e, -error:    This will create a file to track standard error stream.
 
 ### Args:
 Arguments are passed to the file in ther order they are given after the -a flag

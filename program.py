@@ -1,3 +1,7 @@
+"""
+Takes a file as an argument and prints the contents of the file to stdout,
+it also prints a message to stderr indicating the file is being processed.
+"""
 import sys
 import os
 
@@ -14,6 +18,7 @@ def main():
         for line in f.readlines():
             print(line.strip().lower(), file=sys.stdout)    
     
+    print('Done.', file=sys.stderr)
 
 if __name__ == '__main__':  
     main()

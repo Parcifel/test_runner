@@ -29,6 +29,7 @@ Flags:\n
 \t    -h, --help:    Display this help message\n
 \t    -o, --output:  Specify the output folder\n
 \t    -a, --args:    Specify the arguments to be passed to the program\n
+\t    -e, -error:    This will create a file to track standard error stream.\n
 \n
 Args:\n
 Arguments are passed to the file in ther order they are given after the -a flag\n
@@ -44,6 +45,7 @@ EOF
 )
 
 args=()
+track_stderr=false
 
 if [ $# -lt 2 ]
 then
@@ -66,6 +68,10 @@ while [ $# -gt 2 ]; do
                 args+=("$2")
                 shift
             done
+            shift
+            ;;
+        -e|-error)
+            track_stderr=true
             shift
             ;;
         *)
@@ -144,6 +150,12 @@ case $program_ext in
             name=$(echo $file | cut -f 1 -d '.')
             extension=$(echo $file | cut -f 2 -d '.')
             output_file=$output_folder/$name.out.$extension
+            touch $output_file
+
+            if [ $track_stderr = true ]; then
+                error_file=$output_folder/$name.err.log
+                touch $error_file
+            fi
 
             for arg in ${args[@]}; do
                 if [[ $arg =~ "%if" ]]; then
@@ -177,8 +189,13 @@ case $program_ext in
                 command="$command > $output_file"
             fi
 
+            if [ $track_stderr = true ]; then
+                echo "   Tracking stderr ..."
+                command="$command 2> $error_file"
+            fi
+
             echo $command
-            command
+            eval $command
         done
         ;;
     "java")
