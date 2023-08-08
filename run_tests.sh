@@ -159,13 +159,13 @@ case $program_ext in
 
             for arg in ${args[@]}; do
                 if [[ $arg =~ "%if" ]]; then
-                    current_args+=$test_file
+                    current_args+=$test_file" "
                     input_pipe=false
                 elif [[ $arg =~ "%of" ]]; then
-                    current_args+=$output_file
+                    current_args+=$output_file" "
                     output_pipe=false
                 else
-                    current_args+=arg
+                    current_args+=arg" "
                 fi
             done
 
