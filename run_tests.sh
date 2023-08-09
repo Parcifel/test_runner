@@ -89,6 +89,16 @@ then
     exit 1
 fi
 
+if [ ! -f $program ]
+then
+    echo "Program ($program) does not exist"
+    exit 1
+fi
+
+if [ "${test_casess_fodler: -1}" == "/" or "${test_casess_fodler: -1}" == "\" ] {
+    test_cases_folder=${test_cases_folder::-1}
+}
+
 if [ -d $test_cases_folder ]
 then
     echo "Running test cases in $test_cases_folder/ ..."
@@ -236,4 +246,4 @@ case $program_ext in
         ;;
 esac
 
-# <AOS> #
+# <Pix'O> #
