@@ -95,7 +95,7 @@ then
     exit 1
 fi
 
-if [ "${test_casess_fodler: -1}" == "/" or "${test_casess_fodler: -1}" == "\" ] {
+if [ "${test_casess_fodler: -1}" == "/" ] || [ "${test_casess_fodler: -1}" == "\\" ] {
     test_cases_folder=${test_cases_folder::-1}
 }
 
